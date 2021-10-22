@@ -18,6 +18,7 @@ fn main() {
     let max_tries = 7;
 
     while tries < max_tries {
+        println!("Tries left: {}", max_tries - tries);
         println!("Guess the secret number:");
 
         let mut guess = String::new();
@@ -26,6 +27,7 @@ fn main() {
             .read_line(&mut guess)
             .expect("Failed to read line");
 
+        tries = tries + 1;
         println!("You guessed: {}", guess);
 
         let guess: u32 = match guess.trim().parse() {
@@ -33,7 +35,6 @@ fn main() {
             Err(_) => continue,
         };
 
-        tries = tries + 1;
 
         match guess.cmp(&secret_number) {
             Ordering::Less => println!("Too small!"),
@@ -44,7 +45,6 @@ fn main() {
             }
         }
 
-        println!("Tries left: {}", max_tries - tries);
     }
     if tries == max_tries {
         println!("Out of tries!");
