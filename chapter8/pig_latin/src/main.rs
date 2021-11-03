@@ -19,13 +19,13 @@
 mod pig_latin;
 
 fn main() {
-    let s = "The Dungeness crab, Metacarcinus magister or Cancer magister,\\
-             is a species of crab that inhabits eelgrass beds and water bottoms \\
-             on the west coast of North America. It typically grows to 20 centimetres \\
-             across the carapace and is a popular seafood. Its common name comes from \\
-             the port of Dungeness, Washington, United States, where it is 'a prized \\
-             crustacean that supports the most valuable fishery on the west coast', and \\
+    let s = "The Dungeness crab, Metacarcinus magister or Cancer magister,\
+             is a species of crab that inhabits eelgrass beds and water bottoms \
+             on the west coast of North America. It typically grows to 20 centimetres \
+             across the carapace and is a popular seafood. Its common name comes from \
+             the port of Dungeness, Washington, United States, where it is 'a prized \
+             crustacean that supports the most valuable fishery on the west coast', and \
              where ocean acidification threatens the marine environment.";
 
+    pig_latin::latinize(s);
 }
-
