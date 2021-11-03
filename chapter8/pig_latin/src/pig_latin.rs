@@ -7,12 +7,12 @@
  */
 
 #[test]
-fn one_word_C() {
+fn one_word_uc() {
     assert_eq!("Ord-way", latinize("Word"));
 }
 
 #[test]
-fn one_word_c() {
+fn one_word_lc() {
     assert_eq!("ord-way", latinize("word"));
 }
 
@@ -37,23 +37,22 @@ pub fn latinize(s: &str) -> String {
             if range.len() < 2 {
             } else {
                 let mut word = String::from(&s[range.clone()]);
-                ss.push_str(pig_latin(&mut word));
+                ss.push_str(latinize_word(&mut word));
             }
             ss.push(c);
             idx = i + 1;
         }
         idx2 = i;
     }
-    range = idx..idx2+1;
+    range = idx..idx2 + 1;
     if range.len() > 2 {
         let mut word = String::from(&s[range.clone()]);
-        ss.push_str(pig_latin(&mut word));
+        ss.push_str(latinize_word(&mut word));
     }
-
     ss
 }
 
-fn pig_latin(word: &mut String) -> &mut String {
+fn latinize_word(word: &mut String) -> &mut String {
     let x = word.remove(0);
     {
         match x.to_ascii_lowercase() {
