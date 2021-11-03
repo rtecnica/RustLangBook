@@ -27,5 +27,5 @@ fn main() {
              crustacean that supports the most valuable fishery on the west coast', and \
              where ocean acidification threatens the marine environment.";
 
-    pig_latin::latinize(s);
+    println!("{}", pig_latin::latinize(s));
 }
