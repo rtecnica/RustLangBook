@@ -71,16 +71,22 @@ impl Employee {
     }
 }
 
-#[test]
-fn add_and_check() {
-    let mut company = Company::new(String::from("Company"));
-    let mut department = Department::new(String::from("Department"));
-    let employee = Employee::new(String::from("Employee"));
+#[cfg(test)]
+mod tests {
 
-    department.add_emp(employee);
-    company.add_dep(department);
+    use super::*;
 
-    assert_eq!("Company", company.name);
-    assert_eq!("Department", company.dep[0].name);
-    assert_eq!("Employee", company.dep[0].emp[0].name);
+    #[test]
+    fn add_and_check() {
+        let mut company = Company::new(String::from("Company"));
+        let mut department = Department::new(String::from("Department"));
+        let employee = Employee::new(String::from("Employee"));
+
+        department.add_emp(employee);
+        company.add_dep(department);
+
+        assert_eq!("Company", company.name);
+        assert_eq!("Department", company.dep[0].name);
+        assert_eq!("Employee", company.dep[0].emp[0].name);
+    }
 }
