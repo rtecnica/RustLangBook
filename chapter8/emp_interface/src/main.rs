@@ -25,8 +25,19 @@
  */ 
 
 mod hr;
-mod parser;
-
+mod command;
 fn main() {
-    println!("Hello, world!");
+    
+    let company = hr::Company::new(String::from("Company Inc."));
+
+    let commands = vec![command::Command::new(String::from("add"), 
+
+                                              |s: Vec<String>| {}),
+                        command::Command::new(String::from("list"), 
+                                              |s: Vec<String>| {}),
+                        command::Command::new(String::from("remove"), 
+                                              |s: Vec<String>| {})];
+    
+    let parsed_command = String::from("add potato to vegetables");
+    
 }

@@ -9,7 +9,7 @@
  *  - Peek
  */
 
-struct Company {
+pub struct Company {
     name: String,
     dep: Vec<Department>,
 }
@@ -31,6 +31,13 @@ impl Company {
     pub fn add_dep(&mut self, dep: Department) {
         if let false = self.check_dep(&dep) {
             self.dep.push(dep);
+        }
+    }
+
+    pub fn print(&self) {
+        println!("\t{}", self.name);
+        for d in &self.dep {
+            d.print();
         }
     }
 }
@@ -59,6 +66,13 @@ impl Department {
             self.emp.push(emp);
         }
     }
+
+    pub fn print(&self) {
+        println!("\t\t{}", self.name);
+        for e in &self.emp {
+            e.print();
+        }
+    }
 }
 
 struct Employee {
@@ -69,6 +83,11 @@ impl Employee {
     pub fn new(name: String) -> Employee {
         Employee { name }
     }
+    
+    pub fn print(&self) {
+        println!("{}", self.name);
+    }
+
 }
 
 #[cfg(test)]
@@ -84,7 +103,7 @@ mod tests {
 
         department.add_emp(employee);
         company.add_dep(department);
-
+        company.print();
         assert_eq!("Company", company.name);
         assert_eq!("Department", company.dep[0].name);
         assert_eq!("Employee", company.dep[0].emp[0].name);

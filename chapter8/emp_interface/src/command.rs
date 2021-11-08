@@ -4,17 +4,17 @@
  *
  */
 
-struct Command {
+pub struct Command {
     name: String,
     action: fn(Vec<String>) -> (),
 }
 
 impl Command {
-    fn new(name: String, action: fn(Vec<String>) -> ()) -> Command {
+    pub fn new(name: String, action: fn(Vec<String>) -> ()) -> Command {
         Command { name, action }
     }
 
-    fn act(&self, args: Vec<String>) {
+    pub fn act(&self, args: Vec<String>) {
         (self.action)(args);
     }
 }
