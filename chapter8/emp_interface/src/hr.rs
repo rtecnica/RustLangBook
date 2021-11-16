@@ -34,15 +34,26 @@ impl Company {
         }
     }
 
+    pub fn add_emp(&mut self, dep: Department, emp: Employee) {
+        if let false = self.check_dep(&dep) {
+            self.add_dep(Department::new(String::from(&dep.name))); 
+        }
+        for x in &mut self.dep {
+            if x.name == dep.name {
+                 x.add_emp(Employee::new(String::from(&emp.name))) 
+            }
+        }
+    }
+
     pub fn print(&self) {
-        println!("\t{}", self.name);
+        println!("{}", self.name);
         for d in &self.dep {
             d.print();
         }
     }
 }
 
-struct Department {
+pub struct Department {
     name: String,
     emp: Vec<Employee>,
 }
@@ -68,14 +79,14 @@ impl Department {
     }
 
     pub fn print(&self) {
-        println!("\t\t{}", self.name);
+        println!("\t{}", self.name);
         for e in &self.emp {
             e.print();
         }
     }
 }
 
-struct Employee {
+pub struct Employee {
     name: String,
 }
 
@@ -83,12 +94,13 @@ impl Employee {
     pub fn new(name: String) -> Employee {
         Employee { name }
     }
-    
-    pub fn print(&self) {
-        println!("{}", self.name);
-    }
 
+    pub fn print(&self) {
+        println!("\t\t{}", self.name);
+    }
 }
+
+
 
 #[cfg(test)]
 mod tests {
@@ -99,10 +111,11 @@ mod tests {
     fn add_and_check() {
         let mut company = Company::new(String::from("Company"));
         let mut department = Department::new(String::from("Department"));
+        let mut department2 = Department::new(String::from("Department"));
         let employee = Employee::new(String::from("Employee"));
-
-        department.add_emp(employee);
-        company.add_dep(department);
+        let employee2 = Employee::new(String::from("Potato"));
+        company.add_emp(department2, employee2);
+        company.add_emp(department, employee);
         company.print();
         assert_eq!("Company", company.name);
         assert_eq!("Department", company.dep[0].name);

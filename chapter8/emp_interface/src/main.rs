@@ -4,7 +4,7 @@
  * Sally to Engineering” or “Add Amir to Sales.” Then let the user retrieve
  * a list of all people in a department or all people in the company by
  * department, sorted alphabetically.
- * 
+ *
  * Data tree should look like:
  * - Company1
  *      - Department1
@@ -20,24 +20,40 @@
  * - Company2
  *      [...]
  *
- * 
  *
- */ 
+ *
+ */
+
+use std::io;
 
 mod hr;
-mod command;
+
 fn main() {
-    
-    let company = hr::Company::new(String::from("Company Inc."));
+    let mut company = hr::Company::new(String::from("Company Inc."));
 
-    let commands = vec![command::Command::new(String::from("add"), 
 
-                                              |s: Vec<String>| {}),
-                        command::Command::new(String::from("list"), 
-                                              |s: Vec<String>| {}),
-                        command::Command::new(String::from("remove"), 
-                                              |s: Vec<String>| {})];
-    
-    let parsed_command = String::from("add potato to vegetables");
-    
+    loop {
+        let mut unparsed_cmd = String::new();
+        io::stdin()
+            .read_line(&mut unparsed_cmd)
+            .expect("Problem reading line!");
+        unparsed_cmd.pop();
+        unparsed_cmd.push(' ');
+        let mut iter = unparsed_cmd.split(' ');
+        match iter.next().unwrap() {
+            "add" => {
+                let emp_s = iter.next().unwrap();
+                iter.next();
+                let dep_s = iter.next().unwrap();
+
+                company.add_emp(
+                    hr::Department::new(String::from(dep_s)),
+                    hr::Employee::new(String::from(emp_s)),
+                );
+            }
+            "list" => company.print(),
+            "quit" => break,
+            s => println!("Didn't understand command: {}", s),
+        }
+    }
 }
