@@ -25,7 +25,7 @@
  */
 
 use std::io;
-
+use std::io::Write;
 mod hr;
 
 fn main() {
@@ -33,6 +33,9 @@ fn main() {
 
 
     loop {
+        print!(" ");
+        io::stdout().flush().expect("Error flushing stdout");
+
         let mut unparsed_cmd = String::new();
         io::stdin()
             .read_line(&mut unparsed_cmd)
@@ -50,6 +53,7 @@ fn main() {
                     hr::Department::new(String::from(dep_s)),
                     hr::Employee::new(String::from(emp_s)),
                 );
+                println!("  Added {} to {}", emp_s, dep_s);
             }
             "list" => company.print(),
             "quit" => break,
