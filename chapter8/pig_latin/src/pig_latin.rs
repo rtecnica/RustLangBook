@@ -65,7 +65,7 @@ fn latinize_word(word: &mut String) -> &mut String {
             }
         };
 
-        if let true = x.is_uppercase() {
+        if x.is_uppercase() {
             word.replace_range(
                 0..1,
                 &format!("{}", word.chars().next().unwrap().to_ascii_uppercase())[..],
